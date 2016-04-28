@@ -1,0 +1,104 @@
+
+.notes{
+	color:#03528b;
+	font-size: 50px;
+	position: fixed;
+	top:130px;
+	left: 0;
+	width:100%;
+	line-height: 100px;
+	overflow: hidden;
+	background: #78e4d4;
+	border-bottom: #42939c solid 5px;
+	border-top: #42939c solid 5px;
+}
+.notes img{
+	vertical-align: middle;
+	position: relative;
+	top:-10px;
+	height:120px;
+	width:120px;
+}
+.content span{
+
+	position: relative;
+	top:55px;
+	display: block;
+/*
+	vertical-align: middle;
+	padding:0 0;
+	margin: 0 0;
+*/}
+.content div{
+	border-radius: 50% 50%;	
+	position: absolute;
+	font-size: 60px;
+	font-weight: 500;
+	color:#efd13d;
+	background: #03528b;
+	text-align: center;
+	vertical-align: middle;
+}
+.content span[class="students"]{font-size: 50px;top:5px;}
+.content div[class="weiji"] span[class="students"]{top:30px;}
+.content div[class="yinyu"] span[class="students"]{top:0px;}
+.content div[class="ccode"] span[class="students"]{top:50px;}
+.content .ccode{
+	right:100px;
+	top:300px;
+	width:220px;
+	height:220px;}
+
+.content .weiji{
+	left:300px;
+	top:550px;
+	width:300px;
+	height:300px;}
+
+.content .mayuan{
+	left:100px;
+	top:800px;
+	width:200px;
+	height:200px;}
+
+.content .caijin{
+	right:50px;
+	top:700px;
+	width:200px;
+	height:200px;}
+
+.content .boyi{
+	left:50px;
+	top:350px;
+	width:260px;
+	height:260px;}
+
+.content .jindai{
+	left:250px;
+	top:1000px;
+	width:240px;
+	height:240px;}
+
+.content .yinyu{
+	right:200px;
+	top:900px;
+	width:200px;
+	height:200px;}
+.bottom_button{
+	position:absolute;
+	bottom:10px;
+}
+.bottom_button div{
+	display: inline;
+	position: relative;
+	width:440px;
+	line-height:140px;
+	border-radius: 20px 20px;
+	text-align: center;
+	color:#c7b447;
+	font-weight: 600;
+	font-size: 65px;
+	background: #003056;
+	}
+.bottom_button .yuezixi{float: left;margin-left:5px;}
+.bottom_button .shouhuo{float: right;margin-left:80px; }

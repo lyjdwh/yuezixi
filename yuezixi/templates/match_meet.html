@@ -56,6 +56,14 @@
 		color: #c7b347;
 		background: #003056;
 	}
+.informations h2 input[type="checkbox"]{
+	width:55px;
+	height: 55px;
+	margin:0 50px;
+	vertical-align: middle;
+	background:#fff;
+	outline:solid #00d9ff thick;
+}
 </style>
 <body>
 <nav class="top">
@@ -68,31 +76,30 @@
 </div>
 <div class="informations">
 	<form>
-		<h2>自习主题</h2>
-		<input type="text" name="Subject" required="required"/>
-		<h2>自习科目</h2>
-		<input type="text" name="Course" required="required" list="subjects_list"/>
+		<h2>自习主题<input type="checkbox" vlaue="ssdad" /></h2>
+		<lable><checkbox /></lable>
+		<input type="text" required="required"/>
+		<h2>自习科目<input type="checkbox" vlaue="ssdad" /></h2>
+		<input type="text" required="required" list="subjects_list"/>
 			<datalist id="subjects_list">\
 				<option label="W3School" value="http://www.w3school.com.cn" />
 				<option label="Google" value="http://www.google.com" />
 				<option label="Microsoft" value="http://www.microsoft.com" />
 			</datalist>
-		<h2>自习地点</h2>
-		<input type="text" name="Location" required="required" list="places_list"/>
+		<h2>自习地点<input type="checkbox" vlaue="ssdad" /></h2>
+		<input type="text" required="required" list="places_list"/>
 			<datalist id="places_list">
 				<option label="W3School" value="http://www.w3school.com.cn" />
 				<option label="Google" value="http://www.google.com" />
 				<option label="Microsoft" value="http://www.microsoft.com" />
 			</datalist>
-		<h2>自习时间</h2>
-		<input type="time" name="Start_time" placeholder="开始时间" required="required"/>
-		<input type="text" name="End_time" placeholder="结束时间" required="required"/>
-		<h2>自习对象</h2>
-		<input type="text" name="Target" required="required"/>
-		<h2>自习人数</h2>
-		<input type="number" name="Number" min="1" step="1" required="required"/>
-		<h2>备注</h2>	
-		<textarea name="Remarks" rows="3"></textarea>
+		<h2>自习时间<input type="checkbox" vlaue="ssdad" /></h2>
+		<input type="time" placeholder="开始时间" required="required"/>
+		<input type="text" placeholder="结束时间" required="required"/>
+		<h2>自习对象<input type="checkbox" vlaue="ssdad" /></h2>
+		<input type="text" required="required"/>
+		<h2>预约人数<input type="checkbox" vlaue="ssdad" /></h2>
+		<input type="number" min="1" step="1" required="required"/>
 		<input type="submit" value="信息发布"/>
 	</form>
 </div>

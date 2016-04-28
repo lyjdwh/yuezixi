@@ -1,0 +1,42 @@
+body{font-family: "Microsoft YaHei" ! important; 
+	background:url(../static/background.png) #84f6e2 fixed;
+	background-size: 100%;
+	overflow-x:hidden; }
+body a{text-decoration: none;}
+a:hover{
+	opacity: 0.2;
+	transition: 0.5s all;
+}
+.top{
+	width:100%;
+	position: fixed;
+	top:0;
+	left:0;
+	background: #003056;
+	line-height: 120px;
+	text-align: center;
+	z-index: 7;
+}
+.top h2{
+	font-size: 70px;
+	font-weight: 600;
+	color: #e3c944;
+	display: inline;
+	vertical-align: middle;
+}
+.top img{
+	padding:0 0;
+	margin:0 0;
+	display: inline;
+	height:120px;
+	width:120px;
+}
+
+#back{
+	position: absolute;
+	left:5px;
+}
+#privaty{
+	position: absolute;
+	right:5px;
+}
