@@ -2,69 +2,18 @@
 <html>
 <head>
 <link rel="stylesheet" href="../static/all_top.css">
+<link rel="stylesheet" href="../static/meet.css">
 <meta http-equiv="content-type" content="tetx/html; charset=UTF-8">
 	<title></title>
 </head>
-<style>
-.button div{
-	display: inline;
-	position: relative;
-	top:100px;
-	width:320px;
-	line-height:100px;
-	border-radius: 20px 20px;
-	text-align: center;
-	color:#c7b447;
-	font-weight: 660;
-	font-size: 55px;
-	background: #003056;
-	}
-.button .yuezixi{float: left;margin-left:100px;margin-top:50px;}
-.button .shouhuo{float: right;margin-right:100px;margin-top:50px;}
-.informations{
-	position: absolute;
-	top:300px;
-	margin: 0 5%;
-	padding: 0 0;
-	width:100%;
-}
-.informations input,.informations textarea{
-	width:90%;
-	border-radius: 30px;
-	border:#cdd6dd 5px solid;
-	font-size: 60px;
-	padding: 20px 0;
-	font-weight: 500;
-}
-.informations h2{
-	position: relative;
-	color: #003056;
-	font-size: 60px;
-	font-weight: 500;
-	line-height: 60px;
-	padding:0 0;
-	margin: 30px 0; 
-}
-.informations input[type="submit"]
-	{
-		width:38%;
-		margin-top: 30px;
-		margin-left: 26%;
-		text-align: center;
-		font-size: 70px;
-		font-weight: 800;
-		color: #c7b347;
-		background: #003056;
-	}
-</style>
 <body>
 <nav class="top">
 	<a href=""><img src="../static/back_button.png" id="back"/></a>
 	<h2>我要约自习</h2>
 </nav>
 <div class="button">
-	<a href=""><div class="yuezixi">邀约自习</div></a>
-	<a href=""><div class="shouhuo">条件匹配</div></a>
+	<div class="yuezixi on">邀约自习</div>
+	<a href="./match_meet.html"><div class="shouhuo">条件匹配</div></a>
 </div>
 <div class="informations">
 	<form>
@@ -73,9 +22,13 @@
 		<h2>自习科目</h2>
 		<input type="text" name="Course" required="required" list="subjects_list"/>
 			<datalist id="subjects_list">\
-				<option label="W3School" value="http://www.w3school.com.cn" />
-				<option label="Google" value="http://www.google.com" />
-				<option label="Microsoft" value="http://www.microsoft.com" />
+				<option  value="微积分" />
+				<option  value="C++" />
+				<option  value="马原" />
+				<option  value="博弈论" />
+				<option  value="近代史" />
+				<option  value="英语" />
+				<option  value="财经" />
 			</datalist>
 		<h2>自习地点</h2>
 		<input type="text" name="Location" required="required" list="places_list"/>
@@ -85,8 +38,8 @@
 				<option label="Microsoft" value="http://www.microsoft.com" />
 			</datalist>
 		<h2>自习时间</h2>
-		<input type="time" name="Start_time" placeholder="开始时间" required="required"/>
-		<input type="text" name="End_time" placeholder="结束时间" required="required"/>
+		<span>开始时间：</span><input type="time" name="Start_time" placeholder="开始时间" required="required"/><br />
+		<span>结束时间：</span><input type="time" name="End_time" placeholder="结束时间" required="required"/>
 		<h2>自习对象</h2>
 		<input type="text" name="Target" required="required"/>
 		<h2>自习人数</h2>
