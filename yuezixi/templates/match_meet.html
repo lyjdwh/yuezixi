@@ -1,0 +1,49 @@
+<!DOCTYPE html>
+<html>
+<head>
+<link rel="stylesheet" href="../static/all_top.css">
+<link rel="stylesheet" href="../static/meet.css">
+<meta http-equiv="content-type" content="tetx/html; charset=UTF-8">
+	<title></title>
+</head>
+<body>
+<nav class="top">
+	<a href=""><img src="../static/back_button.png" id="back"/></a>
+	<h2>我要约自习</h2>
+</nav>
+<div class="button">
+	<a href="./make_meet.html"><div class="yuezixi">邀约自习</div></a>
+	<div class="shouhuo on">条件匹配</div>
+</div>
+<div class="informations">
+	<form>
+		<h2>自习主题<input type="checkbox" name="Subject_1"/></h2>
+		<lable><checkbox /></lable>
+		<input type="text" required="required" name="Subject_1"/>
+		<h2>自习科目<input type="checkbox" name="Course_1"/></h2>
+		<input type="text" required="required" list="subjects_list" name="Course_1"/>
+			<datalist id="subjects_list">\
+				<option  value="微积分" />
+				<option  value="C++" />
+				<option  value="马原" />
+				<option  value="博弈论" />
+				<option  value="近代史" />
+				<option  value="英语" />
+				<option  value="财经" />
+			</datalist>
+		<h2>自习地点<input type="checkbox" name="Location_1"/></h2>
+		<input type="text" required="required" list="places_list" name="Location_1"/>
+			<datalist id="places_list">
+			</datalist>
+		<h2>自习时间<input type="checkbox" name="Time_1"/></h2>
+		<span>开始时间：</span><input type="time" placeholder="开始时间" required="required" name="Start_time_1"/><br />
+		<span>结束时间：</span><input type="time" placeholder="结束时间" required="required" nmae="End_time_1"/>
+		<h2>自习对象<input type="checkbox" name="Target_1"/></h2>
+		<input type="text" required="required" name="Target_1"/>
+		<h2>预约人数<input type="checkbox" name="Number_1"/></h2>
+		<input type="number" min="1" step="1" required="required" name="Number_1"/>
+		<input type="submit" value="信息发布"/>
+	</form>
+</div>
+</body>
+</html>

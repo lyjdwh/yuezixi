@@ -1,0 +1,52 @@
+<!DOCTYPE html>
+<html>
+<head>
+<link rel="stylesheet" href="../static/all_top.css">
+<link rel="stylesheet" href="../static/meet.css">
+<meta http-equiv="content-type" content="tetx/html; charset=UTF-8">
+	<title></title>
+</head>
+<style type="text/css">
+div[class="message"]{
+	border:5px solid #b5fff2;
+	width: 90%;
+	border-radius: 20px;
+	background: #fff;
+	margin:0 10px;
+	font-size: 50px;
+	position: relative;
+}
+</style>
+<body>
+<nav class="top">
+	<a href=""><img src="../static/back_button.png" id="back"/></a>
+	<h2>参与自习</h2>
+</nav>
+<div class="button">
+	<a href="./make_meet.html"><div class="yuezixi">邀约自习</div></a>
+	<a href="./match_meet.html"><div class="shouhuo">条件匹配</div></a>
+</div>
+<div class="informations">
+	<form>
+		<h2>自习主题</h2>
+		<input type="text" name="Subject_2"/>
+		<h2>自习科目</h2>
+		<input type="text" name="Course_2"/>			
+		<h2>自习地点</h2>
+		<input type="text" name="Location_2"/>
+		<h2>自习时间</h2>
+		<span>开始时间：</span><input type="time" name="Start_time_2"/><br />
+		<span>结束时间：</span><input type="time" name="End_time_2"/>
+		<h2>自习对象</h2>
+		<input type="text" name="Target_2"/>
+		<h2>备注</h2>	
+		<textarea name="Remarks_2" rows="3"></textarea>
+		<input type="submit" value="报名参加"/>
+		<h2>留言区</h2>
+		<div class="message">
+		
+		</div>
+	</form>
+</div>
+</body>
+</html>

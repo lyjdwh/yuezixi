@@ -1,0 +1,68 @@
+.button div{
+	display: inline;
+	position: relative;
+	top:100px;
+	width:320px;
+	line-height:100px;
+	border-radius: 20px 20px;
+	text-align: center;
+	color:#c7b447;
+	font-weight: 660;
+	font-size: 55px;
+	background: #003056;
+	}
+.button .yuezixi{float: left;margin-left:100px;margin-top:50px;}
+.button .shouhuo{float: right;margin-right:100px;margin-top:50px;}
+.informations{
+	position: absolute;
+	top:300px;
+	margin: 0 5%;
+	padding: 0 0;
+	width:100%;
+}
+.informations input,.informations textarea{
+	width:90%;
+	border-radius: 30px;
+	border:#cdd6dd 5px solid;
+	font-size: 60px;
+	padding: 20px 0;
+	font-weight: 500;
+}
+.informations input[type="time"]{
+	width:50%;
+	display: inline;
+	text-align: center;
+}
+.informations h2,.informations span{
+	position: relative;
+	color: #003056;
+	font-size: 60px;
+	font-weight: 500;
+	line-height: 60px;
+	padding:0 0;
+	margin: 30px 0; 
+}
+.informations span{
+	font-size: 50px;
+	margin: 0 5%;
+}
+.informations input[type="submit"]
+	{
+		width:38%;
+		margin-top: 30px;
+		margin-left: 26%;
+		text-align: center;
+		font-size: 70px;
+		font-weight: 800;
+		color: #c7b347;
+		background: #003056;
+	}
+.informations h2 input[type="checkbox"]{
+	width:55px;
+	height: 55px;
+	margin:0 50px;
+	vertical-align: middle;
+	background:#fff;
+	outline:solid #00d9ff thick;
+}
+.on{opacity: 0.5}

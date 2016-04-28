@@ -1,0 +1,50 @@
+<!DOCTYPE html>
+<html>
+<head>
+<link rel="stylesheet" href="../static/all_top.css">
+<link rel="stylesheet" href="../static/meet.css">
+<meta http-equiv="content-type" content="tetx/html; charset=UTF-8">
+	<title></title>
+</head>
+<body>
+<nav class="top">
+	<a href=""><img src="../static/back_button.png" id="back"/></a>
+	<h2>我要约自习</h2>
+</nav>
+<div class="button">
+	<div class="yuezixi on">邀约自习</div>
+	<a href="./match_meet.html"><div class="shouhuo">条件匹配</div></a>
+</div>
+<div class="informations">
+	<form>
+		<h2>自习主题</h2>
+		<input type="text" name="Subject" required="required"/>
+		<h2>自习科目</h2>
+		<input type="text" name="Course" required="required" list="subjects_list"/>
+			<datalist id="subjects_list">\
+				<option  value="微积分" />
+				<option  value="C++" />
+				<option  value="马原" />
+				<option  value="博弈论" />
+				<option  value="近代史" />
+				<option  value="英语" />
+				<option  value="财经" />
+			</datalist>
+		<h2>自习地点</h2>
+		<input type="text" name="Location" required="required" list="places_list"/>
+			<datalist id="places_list">
+			</datalist>
+		<h2>自习时间</h2>
+		<span>开始时间：</span><input type="time" name="Start_time" placeholder="开始时间" required="required"/><br />
+		<span>结束时间：</span><input type="time" name="End_time" placeholder="结束时间" required="required"/>
+		<h2>自习对象</h2>
+		<input type="text" name="Target" required="required"/>
+		<h2>自习人数</h2>
+		<input type="number" name="Number" min="1" step="1" required="required"/>
+		<h2>备注</h2>	
+		<textarea name="Remarks" rows="3"></textarea>
+		<input type="submit" value="信息发布"/>
+	</form>
+</div>
+</body>
+</html>
