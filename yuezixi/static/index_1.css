@@ -22,8 +22,10 @@
 .content span{
 
 	position: relative;
-	top:55px;
+	top:70px;
 	display: block;
+	margin: 0 0;
+	padding: 0 0;
 /*
 	vertical-align: middle;
 	padding:0 0;
@@ -37,12 +39,12 @@
 	color:#efd13d;
 	background: #03528b;
 	text-align: center;
-	vertical-align: middle;
+/*	vertical-align: middle;*/
 }
-.content span[class="students"]{font-size: 50px;top:5px;}
+/*.content span[class="students"]{font-size: 50px;top:50px;}
 .content div[class="weiji"] span[class="students"]{top:30px;}
 .content div[class="yinyu"] span[class="students"]{top:0px;}
-.content div[class="ccode"] span[class="students"]{top:50px;}
+.content div[class="ccode"] span[class="students"]{top:50px;}*/
 .content .ccode{
 	right:100px;
 	top:300px;
