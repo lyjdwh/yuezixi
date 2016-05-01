@@ -3,6 +3,8 @@
 <head>
 <link rel="stylesheet" href="../static/all_top.css">
 <link rel="stylesheet" href="../static/person.css">
+<link rel="stylesheet" href="../static/modify.css">
+
 <meta http-equiv="content-type" content="tetx/html; charset=UTF-8">
 	<title></title>
 </head>
@@ -19,49 +21,49 @@
 	</div>
 </div>
 <div class="div_1">
+<form>
 	<table>
 		<tr>
 			<td>我的姓名：</td>
-			<td name="Name"></td>
+			<td><input type="text" name="Name_1"/></td>
 		</tr>
 		<tr>
 			<td>我的性别：</td>
-			<td name="Sex"></td>
+			<td><input type="text" name="Sex_1"/></td>
 		</tr>
 		<tr>
 			<td>专业班级：</td>
-			<td name="Major"></td>
+			<td><input type="text" name="Major_1"/></td>
 		</tr>
 		<tr>
 			<td>手机号码：</td>
-			<td name="Phone_number"></td>
+			<td><input type="number" name="Phone_number_1"/></td>
 		</tr>
 		<tr>
 			<td>QQ号码：</td>
-			<td name="QQ"></td>
+			<td><input type="number" name="QQ_1"/></td>
 		</tr>
 		<tr>
 			<td>邮箱：</td>
-			<td name="Email"></td>
+			<td><input type="email" name="Email_1"/></td>
 		</tr>
 		<tr>
 			<td>优势学科：</td>
-			<td name="Best_subject"></td>
+			<td><input type="text" name="Best_subject_1"/></td>
 		</tr>
 		<tr>
 			<td>劣势学科：</td>
-			<td name="Worse_subject"></td>
+			<td><input type="text" name="Worse_subject_1"/></td>
 		</tr>
 	</table>
 </div>
 <div class="div_2">
-	自我介绍：<span name="Self_introduction"></span>
+	自我介绍：<br /><textarea name="Self_introduction_1"></textarea> 
 </div>
 <div class="div_3">
-	学习目标与志向：<span name="Goal"></span>
+	学习目标与志向：<br /><textarea name="Goal"></textarea> 
 </div>
-<a href="./modify.html"><div class="div_4">
-修改信息
-</div></a>
+<input type="submit" value="确认修改" />
+</form>
 </body>
 </html>

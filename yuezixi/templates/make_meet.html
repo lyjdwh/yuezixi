@@ -18,27 +18,49 @@
 <div class="informations">
 	<form>
 		<h2>自习主题</h2>
-		<input type="text" name="Subject" required="required"/>
-		<h2>自习科目</h2>
-		<input type="text" name="Course" required="required" list="subjects_list"/>
-			<datalist id="subjects_list">\
-				<option  value="微积分" />
-				<option  value="C++" />
-				<option  value="马原" />
-				<option  value="博弈论" />
-				<option  value="近代史" />
-				<option  value="英语" />
-				<option  value="财经" />
+		<input type="text" name="Subject" placeholder="请选择主题" list="subject" required="required"/>
+			<datalist id="subject">
+				<option value="无" />
+				<option value="答疑解惑"/>
+				<option value="探讨人生"/>
+				<option value="学科提升"/>
+				<option value="阅读书籍"/>
+				<option value="分享兴趣"/>
+				<option value="其他">
 			</datalist>
+		<h2>自习科目</h2>
+		<input type="text" name="Course" placeholder="请选输入科目" required="required" list="subjects_list"/>
 		<h2>自习地点</h2>
-		<input type="text" name="Location" required="required" list="places_list"/>
+		<input type="text" name="Location" placeholder="请选择地点" required="required" list="places_list"/>
 			<datalist id="places_list">
+				<option value="随便" />
+				<option value="东九"/>
+				<option value="东十二"/>
+				<option value="西十二"/>
+				<option value="东图"/>
+				<option value="主图"/>
+				<option value="其他">
 			</datalist>
 		<h2>自习时间</h2>
-		<span>开始时间：</span><input type="time" name="Start_time" placeholder="开始时间" required="required"/><br />
-		<span>结束时间：</span><input type="time" name="End_time" placeholder="结束时间" required="required"/>
+		<span>开始时间：</span><input type="datetime-local" name="Start_time" placeholder="开始时间" required="required"/><br />
+		<span>结束时间：</span><input type="datetime-local" name="End_time" placeholder="结束时间" required="required"/>
 		<h2>自习对象</h2>
-		<input type="text" name="Target" required="required"/>
+		<input type="text" class="target" name="Target1" placeholder="年级" list="target_list" required="required" />
+			<datalist id="target_list">
+				<option value="无" />
+				<option value="大一"/>
+				<option value="大二"/>
+				<option value="大三"/>
+				<option value="大四"/>
+				<option value="研究生"/>
+				<option value="博士"/>
+			</datalist>
+		<input type="text" class="target" name="Target2" placeholder="性别" list="target_list_sex" required="required"/>
+			<datalist id="target_list_sex">
+				<option value="无" checked/>
+				<option value="男生"/>
+				<option value="女生"/>
+			</datalist>	
 		<h2>自习人数</h2>
 		<input type="number" name="Number" min="1" step="1" required="required"/>
 		<h2>备注</h2>	

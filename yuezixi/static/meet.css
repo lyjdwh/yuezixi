@@ -28,8 +28,13 @@
 	padding: 20px 0;
 	font-weight: 500;
 }
-.informations input[type="time"]{
+.informations input[type="datetime-local"]{
 	width:50%;
+	display: inline;
+	text-align: center;
+}
+.informations input[class="target"]{
+	width:45%;
 	display: inline;
 	text-align: center;
 }
@@ -56,13 +61,14 @@
 		font-weight: 800;
 		color: #c7b347;
 		background: #003056;
+		margin-bottom: 20px;
 	}
-.informations h2 input[type="checkbox"]{
+/*.informations h2 input[type="checkbox"]{
 	width:55px;
 	height: 55px;
 	margin:0 50px;
 	vertical-align: middle;
 	background:#fff;
 	outline:solid #00d9ff thick;
-}
+}*/
 .on{opacity: 0.5}

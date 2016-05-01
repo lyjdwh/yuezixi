@@ -1,0 +1,26 @@
+form div{
+	position: relative;
+	top:200px;
+	width:96%;
+	text-align: center;
+	font-size: 55px;
+	font-weight: 500;
+}
+.top a{
+	font-size: 50px;
+	font-weight: 600;
+	color: #e3c944;
+	display: inline;
+	vertical-align: middle;
+}
+.topl{position: absolute;left:20px;}
+.topr{position: absolute;right:20px;	}
+form div input{
+	width: 50%;
+	font-size: 55px;
+	border:5px solid;
+	border-radius: 15px;
+	margin: 20px 0;
+	color: #003056;
+	padding: 10px 0;
+}
