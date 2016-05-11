@@ -18,35 +18,61 @@ a{color:#000;}
 	<img src="../static/search.png">
 	<input type="search" placeholder="人名，教室，科目等" />
 </div>
-<a href="./invate.html">
+
+	{% for mk in mks.items %}
+<a href="{{url_for('invate',id=mk.id)}}">
+
+	</form>
+
+
 	<div class="contents">
 		<img class="" src="../static/header.png"/>
 		<table class="top_info">
-			<tr>	
-				<td name="Name_3">微仔</td>
+			<tr>
+				<td name="Name_3">{{mk.User.PersonalData.first().Name}}</td>
 				<td>科目：</td>
-				<td name="Course_3"></td>
+				<td name="Course_3">{{mk.Course}}</td>
 			</tr>
 
-			<tr>	
-				<td name="Major_3">电信1504</td>
+			<tr>
+				<td name="Major_3">{{mk.User.PersonalData.first().Major}}</td>
 				<td>主题：</td>
-				<td name="Subject_3"></td>
+				<td name="Subject_3">{{mk.Subject}}</td>
 			</tr>
 		</table>
 
 		<table class="bottom_info">
 			<tr>
-				<td  class="location" name="Location_3">东九A211</td>
+				<td  class="location" name="Location_3">{{mk.Location}}</td>
 				<td></td>
 			</tr>
 
 			<tr>
-				<td name="Time_3">18:00~20:00</td>
-				<td class="numbers" name="Number_3">人数：2</td>
+				<td name="Time_3">{{mk.Start_time|time}}~{{mk.End_time|time}}</td>
+				<td class="numbers" name="Number_3">人数：{{mk.Number}}</td>
 			</tr>
 		</table>
 		</div>
-</a>
+	</a>
+	{% endfor %}
+
+
+
+
+
+<div class="pagination  ">
+    <div class="row-fluid">
+        <div class="span3 offset2">
+           {% if mks.has_prev %}<a href="{{ url_for('notice', page = mks.prev_num) }}"><< Newer posts</a>{% else %}<< Newer posts{% endif %}
+        </div>
+        <div class="span3 ">
+            Page {{ mks.page }} of {{ mks.pages }}
+        </div>
+        <div class="span3 ">
+
+           {% if mks.has_next %}<a href="{{ url_for('notice', page = mks.next_num) }}">Older posts >></a>{% else %}Older posts >>{% endif %}
+        </div>
+    </div>
+</div>
 </body>
 </html>

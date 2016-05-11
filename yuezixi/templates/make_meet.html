@@ -16,7 +16,7 @@
 	<a href="./match_meet.html"><div class="shouhuo">条件匹配</div></a>
 </div>
 <div class="informations">
-	<form>
+	<form method="post" action="{{url_for('make_meet')}}">
 		<h2>自习主题</h2>
 		<input type="text" name="Subject" placeholder="请选择主题" list="subject" required="required"/>
 			<datalist id="subject">

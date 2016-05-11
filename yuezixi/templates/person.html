@@ -22,45 +22,45 @@
 	<table>
 		<tr>
 			<td>我的姓名：</td>
-			<td name="Name"></td>
+			<td name="Name">{{pd.Name}}</td>
 		</tr>
 		<tr>
 			<td>我的性别：</td>
-			<td name="Sex"></td>
+			<td name="Sex">{{pd.Sex}}</td>
 		</tr>
 		<tr>
 			<td>专业班级：</td>
-			<td name="Major"></td>
+			<td name="Major">{{pd.Major}}</td>
 		</tr>
 		<tr>
 			<td>手机号码：</td>
-			<td name="Phone_number"></td>
+			<td name="Phone_number">{{pd.Phone_number}}</td>
 		</tr>
 		<tr>
 			<td>QQ号码：</td>
-			<td name="QQ"></td>
+			<td name="QQ">{{pd.QQ}}</td>
 		</tr>
 		<tr>
 			<td>邮箱：</td>
-			<td name="Email"></td>
+			<td name="Email">{{pd.Email}}</td>
 		</tr>
 		<tr>
 			<td>优势学科：</td>
-			<td name="Best_subject"></td>
+			<td name="Best_subject">{{pd.Best_subject}}</td>
 		</tr>
 		<tr>
 			<td>劣势学科：</td>
-			<td name="Worse_subject"></td>
+			<td name="Worse_subject">{{pd.Worse_subject}}</td>
 		</tr>
 	</table>
 </div>
 <div class="div_2">
-	自我介绍：<span name="Self_introduction"></span>
+	自我介绍：<span name="Self_introduction">{{pd.Self_introduction}}</span>
 </div>
 <div class="div_3">
-	学习目标与志向：<span name="Goal"></span>
+	学习目标与志向：<span name="Goal">{{pd.Goal}}</span>
 </div>
-<a href="./modify.html"><div class="div_4">
+<a href="{{url_for('modify')}}"><div class="div_4">
 修改信息
 </div></a>
 </body>

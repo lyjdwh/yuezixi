@@ -12,9 +12,9 @@
 <nav class="top">
 	<!-- <a href="" class="topl">忘记密码</a> -->
 	<h2>登录</h2>
-	<a href="./register.html" class="topr">注册</a>
+	<a href= "{{ url_for('register') }}" class="topr">注册</a>
 </nav>
-<form>
+<form method="post">
 <div>姓名：<input type="text" placeholder="请输入姓名" name="Name_0"/></div>
 <div>密码：<input type="password" placeholder="请输入密码" name="Password_0"/></div>
 <div><input type="submit" value="登录"></div>
