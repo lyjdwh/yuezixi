@@ -1,5 +1,5 @@
 body{font-family: "Microsoft YaHei" ! important; 
-	background:url(../static/background.png) #84f6e2 fixed;
+	background:/*url(../static/background.png)*/ /*#84f6e2*/ #b5fff2 fixed;
 	background-size: 100%;
 	overflow-x:hidden; }
 body a{text-decoration: none;}
