@@ -2,7 +2,7 @@ from flask import Flask
 from flask.ext.sqlalchemy import SQLAlchemy
 from flask.ext.login import LoginManager
 import pymysql
-from flask_mail import Mail
+from flask.ext.mail import Mail
 
 app=Flask(__name__)
 app.config.from_object('config')

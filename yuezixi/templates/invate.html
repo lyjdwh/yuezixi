@@ -19,12 +19,12 @@ div[class="message"]{
 </style>
 <body>
 <nav class="top">
-	<a href=""><img src="../static/back_button.png" id="back"/></a>
+	<a href="{{g.last_page}}"><img src="../static/back_button.png" id="back"/></a>
 	<h2>参与自习</h2>
 </nav>
 <div class="button">
-	<a href="./make_meet.html"><div class="yuezixi">邀约自习</div></a>
-	<a href="./match_meet.html"><div class="shouhuo">条件匹配</div></a>
+	<a href="{{url_for('make_meet')}}"><div class="yuezixi">邀约自习</div></a>
+	<a href="{{url_for('match_meet')}}"><div class="shouhuo">条件匹配</div></a>
 </div>
 <div class="informations">
 	<form method="post" }}">

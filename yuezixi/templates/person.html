@@ -8,14 +8,15 @@
 </head>
 <body>
 <nav class="top">
-	<a href=""><img src="../static/back_new.png" id="back"/></a>
-	<a href="./current.html" class="current">当前预约</a>
+	<a href="{{url_for('index')}}"><img src="../static/back_new.png" id="back"/></a>
+	<a href="{{url_for('current')}}" class="current">当前预约</a>
 </nav>
 <div class="summery">
 	<img src="../static/header_new.png">
 	<div class="summery_1">
-		<span class="left">贝壳数：<span>8888</span></span>		
-		<span class="right">等级称号：<span>自习狂魔</span></span>
+		<span class="left">贝壳数：<span>{{pd.Shells}}</span></span>
+		<span class="right">等级称号：{%if pd.Shells<10 %}<span>自习初手</span>{% elif pd.Shells<30 %}<span>自习小子</span>{% elif pd.Shells<60 %}<span>自习达人</span>{% elif pd.Shells<100 %}<span>自习帝</span>{% else %}<span>自习狂魔</span>{% endif %}</span>
+
 	</div>
 </div>
 <div class="div_1">

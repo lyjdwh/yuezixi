@@ -7,10 +7,20 @@ SECRET_KEY = 'you-will-never-guess'
 SQLALCHEMY_DATABASE_URI='mysql+pymysql://root:abc201314@localhost/lyjdwh'
 SQLALCHEMY_TRACK_MODIFICATIONS=True
 
-
-MAIL_SERVER='smtp.163.com'
-MAIL_PORT='465'
+MAIL_SERVER='smtp.qq.com'
+MAIL_PORT=465
 MAIL_USE_SSL=True
-MAIL_USERNAME='15207183373@163.com'
-MAIL_PASSWORD='cba413102'
+MAIL_USERNAME='1412511544'
+MAIL_PASSWORD='hhvrqpgielyhggab'
+MAIL_USE_TLS = False
+
+
+WHOOSH_BASE='mysql+pymysql://root:abc201314@localhost/lyjdwh'
+MAX_SEARCH_RESULTS = 50
+
+
+
+
+
+
 #MAIL_DEFAULT_SENDER='系统'

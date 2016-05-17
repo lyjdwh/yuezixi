@@ -1,9 +1,10 @@
 # -*-coding:utf-8 -*-
-from flask import render_template,flash,redirect,url_for,g,sessions,request,current_app
+from flask import render_template,flash,redirect,url_for,g,session,request,current_app
 from flask.ext.login import current_user,login_required,login_user,logout_user
 from datetime  import datetime
 from fuzzywuzzy import fuzz
 from flask_mail import Message
+from threading import Thread
 
 from . import app
 from . import lm,db,mail
@@ -64,6 +65,10 @@ def log_in():
     return render_template('log_in.html', error=error)
 
 
+@app.route('/info')
+def info():
+    return render_template('info.html')
+
 @app.route('/modify',methods=['POST','GET'])
 @login_required
 def modify():
@@ -87,7 +92,8 @@ def modify():
         db.session.add(personal_data2)
         db.session.commit()
         return redirect(url_for('index'))
-    return  render_template('modify.html')
+    personal_data1 = current_user.PersonalData.first()
+    return  render_template('modify.html',pd=personal_data1)
 @app.route('/person')
 @login_required
 def person():
@@ -110,7 +116,9 @@ def make_meet():
 
         make_match1=Make_match(Subject,Course,Location,Start_time,End_time,Target_1,Target_2,Number,Remarks,current_user)
         db.session.add(make_match1)
+        current_user.PersonalData.first().Shells = current_user.PersonalData.first().Shells + 1
         db.session.commit()
+
 
         return redirect(url_for('notice'))
     return render_template('make_meet.html')
@@ -119,7 +127,8 @@ def make_meet():
 @app.route('/notice/<int:page>', methods = ['GET', 'POST'])
 @login_required
 def notice(page = 1):
-    mks=Make_match.query.filter(Make_match.Number_1 < Make_match.Number ).paginate(page, 2, False)
+    mks=Make_match.query.filter(Make_match.Number_1 < Make_match.Number ).order_by(Make_match.id.desc()).paginate(page, 2, False)
+
     return render_template('notice.html',mks=mks)
 
 @app.route('/match_meet',methods=["POST","GET"])
@@ -134,14 +143,19 @@ def match_meet():
         Target_2 = request.form['Target_1']
         Number = request.form['Number_1']
 
+
         choices=[Subject,Course,Location,Start_time,End_time,Target_1,Target_2,Number]
         if (Make_match.query.filter(Start_time<=Make_match.Start_time,Make_match.Start_time<=End_time).all()) :
             mks=Make_match.query.filter(Start_time<=Make_match.Start_time,Make_match.Start_time<=End_time).all()
         elif (Make_match.query.filter(Start_time<=Make_match.End_time,Make_match.End_time<=End_time).all()):
             mks=Make_match.query.filter(Start_time<=Make_match.End_time,Make_match.End_time<=End_time).all()
+        else:
+            mks=Make_match.query.all()
+
         for mk in mks:
             mk.Score=fuzz.partial_ratio(Location,mk.Location)
-        mks1=Make_match.query.filter(Make_match.Score>80).all()
+
+        mks1=Make_match.query.filter(Make_match.Score>=80).order_by(Make_match.Score.desc()).all()
 
         for mk in mks1:
             a1=fuzz.partial_ratio(Subject,mk.Subject)
@@ -149,11 +163,22 @@ def match_meet():
             a3=fuzz.partial_ratio(Target_1,mk.Target1)
             a4=fuzz.partial_ratio(Target_2,mk.Target2)
             mk.Score=mk.Score+a2+a2+a3+a4
-        mks2=Make_match.query.order_by(Make_match.Score).limit(20).paginate(1, 21, False)
+        mks2=Make_match.query.order_by(Make_match.Score.desc()).limit(20).paginate(1, 21, False)
         return render_template('notice.html',mks=mks2)
 
 
     return render_template('match_meet.html')
+
+@app.route('/current',methods=["POST","GET"])
+def current():
+
+    mkeds=current_user.Make_match.order_by(Make_match.id.desc()).first()
+    if mkeds is None:
+        return "你还没有发起自习，或者没人应约你的自习"
+    else:
+        return render_template('current.html',mkeds=mkeds.Mked.all())
+
+
 
 
 
@@ -173,17 +198,43 @@ def invate(id):
         Self_introduction=current_user.PersonalData.first().Self_introduction
         mked=Mked(Name,Sex,Email,Phone_number,QQ,Grade,Major,Self_introduction,mk)
         db.session.add(mked)
+        current_user.PersonalData.first().Shells = current_user.PersonalData.first().Shells + 1
         db.session.commit()
-        return 'good'
+        session['QQ']=mk.User.PersonalData.first().QQ
+        return redirect(url_for('mail1'))
+
+    if "match_meet" in request.referrer:
+        g.last_page=request.referrer
+    else:
+        g.last_page=url_for('index')
     g.mk=Make_match.query.filter_by(id=id).first()
     return render_template('invate.html')
 
-@app.route("/mail")
-def index():
-    msg = Message(subject="Hello",sender=("系统", "15207183373@163.com"),recipients=["1412511544@qq.com"])
-    msg.body = "testing"
-    mail.send(msg)
-        
+@app.route("/mail1")
+def mail1():
+    #send_email('约自习', ('me', '1412511544@qq.com'), ['15207183373@163.com'],'hello')
+    #return 'good'
+    invite_data=PersonalData.query.filter_by(QQ=session['QQ']).first()
+    invited_data=current_user.PersonalData.first()
+
+    str2="你已经应约了"+invite_data.Name.encode('utf-8')+"的自习啦， 她/他的qq:"+invite_data.QQ.encode('utf-8')+", Email:"+invite_data.Email.encode('utf-8')+", 你们可以在线下联系呦， 祝你们学习愉快"
+    str1="有人应约你的自习啦， 他/她的名字："+invited_data.Name.encode('utf-8')+", 年级："+invited_data.Grade.encode('utf-8')+", 专业："+invited_data.Major.encode('utf-8')+", qq:"+invited_data.QQ.encode('utf-8')+", Email:"+invited_data.Email.encode('utf-8')+", 你们可以在线下联系呦，祝你们学习愉快"
+    send_email('约自习',('me','1412511544@qq.com'),[invited_data.Email],str2)
+    send_email('约自习',('me','1412511544@qq.com'),[invite_data.Email],str1)
+    return 'good'
+
+
+def send_async_email(app, msg):
+    with app.app_context():
+        mail.send(msg)
+
+def send_email(subject, sender, recipients, text_body):
+    msg = Message(subject, sender=sender, recipients=recipients)
+    msg.body = text_body
+    thr = Thread(target=send_async_email, args=[app, msg])
+    thr.start()
+
+
 
 
 

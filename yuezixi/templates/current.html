@@ -11,42 +11,45 @@ a{color:#000;}
 </style>
 <body>
 <nav class="top">
-	<a href=""><img src="../static/back_button.png" id="back"/></a>
+	<a href="{{url_for('person')}}"><img src="../static/back_button.png" id="back"/></a>
 	<h2>当前预约</h2>
 </nav>
 <div class="search">
 	<img src="../static/search.png">
 	<input type="search" placeholder="人名，教室，科目等" />
 </div>
-<a href="./particulars.html">
+{% for mked in mkeds %}
+
 <div class="contents">
 	<img class="" src="../static/header.png"/>
 	<table class="top_info">
 			<tr>	
-				<td name="Name_4">微仔</td>
-				<td>科目：</td>
-				<td name="Course_4"></td>
+				<td name="Name_4">{{mked.Name}}</td>
+				<td>性别：</td>
+				<td name="Course_4">{{mked.Sex}}</td>
 			</tr>
 
 			<tr>	
-				<td name="Major_4">电信1504</td>
-				<td>主题：</td>
-				<td name="Subject_4"></td>
+				<td name="Major_4">{{mked.Major}}</td>
+				<td>年级：</td>
+				<td name="Subject_4">{{mked.Grade}}</td>
 			</tr>
 		</table>
 
 		<table class="bottom_info">
 			<tr>
-				<td  class="location" name="Location_4">东九A211</td>
-				<td></td>
+				<td  class="location" name="Location_4">QQ</td>
+				<td>{{mked.QQ}}</td>
 			</tr>
 
 			<tr>
-				<td name="Time_4">18:00~20:00</td>
-				<td class="numbers" name="Number_4">人数：2</td>
+				<td name="Time_4">电话：</td>
+				<td>{{mked.Phone_number}}</td>
+
 			</tr>
 		</table>
 	</div>
-</a>
+
+{% endfor %}
 </body>
 </html>

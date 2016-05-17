@@ -8,11 +8,11 @@
 </head>
 <body>
 <nav class="top">
-	<a href=""><img src="../static/back_button.png" id="back"/></a>
+	<a href="{{url_for('index')}}"><img src="../static/back_button.png" id="back"/></a>
 	<h2>我要约自习</h2>
 </nav>
 <div class="button">
-	<a href="./make_meet.html"><div class="yuezixi">邀约自习</div></a>
+	<a href="{{url_for('make_meet')}}"><div class="yuezixi">邀约自习</div></a>
 	<div class="shouhuo on">条件匹配</div>
 </div>
 <div class="informations">
