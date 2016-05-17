@@ -7,7 +7,7 @@
 <meta http-equiv="content-type" content="tetx/html; charset=UTF-8">
 	<title></title>
 </head>
-<body>
+<body onkeyup="Error_co();">
 <div>
 </div>
 <nav class="top">
@@ -15,10 +15,23 @@
 	<h2>注册</h2>
 </nav>
 <form method="post" action="{{url_for('register')}}">
-<div>姓名：<input type="text" placeholder="请输入姓名" name="Name_0"/></div>
-<div>密码：<input type="password" placeholder="请输入密码" name="Password_0"/></div>
-<div>确认密码：<input type="password" placeholder="请再次输入密码" name="Password_01"/></div>
-<div><input type="submit" value="注册"></div>
+<div>姓名：<input type="text" placeholder="请输入姓名" name="Name_0" required/></div>
+<div>密码：<input type="password" placeholder="请输入密码" name="Password_0" id="p1" required value=""/></div>
+<div>确认密码：<input type="password" placeholder="请再次输入密码" name="Password_01" id="p2" required value="" /><span></span></div>
+<div><input type="submit" value="注册" ></div>
 </form>
 </body>
 </html>
+<script type="text/javascript">
+
+function Error_co()
+{	
+	pp1=document.getElementById("p1").value;	
+	pp2=document.getElementById("p2").value;
+	if(pp1!=pp2)
+		{
+		document.getElementsByTagName("span")[0].innerHTML="  X";
+		}
+	else{document.getElementsByTagName("span")[0].innerHTML="";}	
+}
+</script>
