@@ -26,8 +26,11 @@ a{color:#003056;}
 }
 .summery img{
 	position: relative;
-	top:120px;
+	top:70px;
+	height:250px;
 	z-index: 5;
+	border-radius:50% 50%;
+
 }
 .summery .summery_1{
 	background: #fff;

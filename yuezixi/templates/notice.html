@@ -8,6 +8,24 @@
 </head>
 <style>
 a{color:#000;}
+	.pagination{
+		position: fixed;
+		font-size: 50px;;
+	}
+	.pagination{width:100%;
+	background: #00bcd4;
+		text-align: center;
+		margin:0 0;
+		padding: 10px;;
+		left:0px;
+		bottom:0;
+	}
+	.span3_1{
+		float: left;
+		padding-left: 50px;}
+		.span3_3{
+		float: right;
+		padding-right: 50px;}
 </style>
 <body>
 <nav class="top">
@@ -19,14 +37,12 @@ a{color:#000;}
 	<input type="search" placeholder="人名，教室，科目等" />
 </div>
 
+
+<div class="info">
 	{% for mk in mks.items %}
 <a href="{{url_for('invate',id=mk.id)}}">
-
-	</form>
-
-
 	<div class="contents">
-		<img class="" src="../static/header.png"/>
+		<img class="" src="../static/uploads/ThuMay19013608.png"/>
 		<table class="top_info">
 			<tr>
 				<td name="Name_3">{{mk.User.PersonalData.first().Name}}</td>
@@ -46,8 +62,7 @@ a{color:#000;}
 				<td  class="location" name="Location_3">{{mk.Location}}</td>
 				<td></td>
 			</tr>
-
-			<tr>
+<tr>
 				<td name="Time_3">{{mk.Start_time|time}}~{{mk.End_time|time}}</td>
 				<td class="numbers" name="Number_3">人数：{{mk.Number}}</td>
 			</tr>
@@ -55,23 +70,23 @@ a{color:#000;}
 		</div>
 	</a>
 	{% endfor %}
+</div>
 
 
 
 
-
-<div class="pagination  ">
+<div class="pagination">
     <div class="row-fluid">
-        <div class="span3 offset2">
-           {% if mks.has_prev %}<a href="{{ url_for('notice', page = mks.prev_num) }}"><< Newer posts</a>{% else %}<< Newer posts{% endif %}
-        </div>
-        <div class="span3 ">
-            Page {{ mks.page }} of {{ mks.pages }}
-        </div>
-        <div class="span3 ">
+        <span class="span3 span3_1 offset2">
+           {% if mks.has_prev %}<a href="{{ url_for('notice', page = mks.prev_num) }}"><<上一页</a>{% else %}&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;{% endif %}
+        </span>
+        <span class="span3 span3_2">
+			{{ mks.page }}/{{ mks.pages }}
+        </span>
+        <span class="span3 span3_3">
 
-           {% if mks.has_next %}<a href="{{ url_for('notice', page = mks.next_num) }}">Older posts >></a>{% else %}Older posts >>{% endif %}
-        </div>
+           {% if mks.has_next %}<a href="{{ url_for('notice', page = mks.next_num) }}">下一页>></a>{% else %}&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;{% endif %}
+        </span>
     </div>
 </div>
 </body>

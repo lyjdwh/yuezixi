@@ -11,27 +11,37 @@
 <div>
 </div>
 <nav class="top">
-	<a href="./log_in.html" class="topl">登录</a>
+	<a href="{{url_for('log_in')}}" class="topl">登录</a>
 	<h2>注册</h2>
 </nav>
 <form method="post" action="{{url_for('register')}}">
-<div>姓名：<input type="text" placeholder="请输入姓名" name="Name_0" required/></div>
-<div>密码：<input type="password" placeholder="请输入密码" name="Password_0" id="p1" required value=""/></div>
-<div>确认密码：<input type="password" placeholder="请再次输入密码" name="Password_01" id="p2" required value="" /><span></span></div>
-<div><input type="submit" value="注册" ></div>
+	{{form.hidden_tag()}}
+	{% for error in form.Name_0.errors %}
+          <div>  <span style="color: red;">{{ error }}</span><br></div>
+          {% endfor %}
+	 <div>{% for error in form.Password_01.errors %}
+            <span style="color: red;">{{ error }}</span>
+          {% endfor %}<br>
+	</div>
+	<div>{{form.Name_0.label}}{{form.Name_0(placeholder="请输入姓名")}}</div>
+	<div>{{form.Password_0.label}}{{form.Password_0(placeholder="请输入密码",id="p1")}}</div>
+	<div>{{form.Password_01.label}}{{form.Password_01( placeholder="请再次输入密码",id="p2")}}&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;</div>
+	<div> {{form.Summit(value='登录')}}</div>
+
 </form>
+
 </body>
 </html>
-<script type="text/javascript">
+<!--<script type="text/javascript">-->
 
-function Error_co()
-{	
-	pp1=document.getElementById("p1").value;	
-	pp2=document.getElementById("p2").value;
-	if(pp1!=pp2)
-		{
-		document.getElementsByTagName("span")[0].innerHTML="  X";
-		}
-	else{document.getElementsByTagName("span")[0].innerHTML="";}	
-}
-</script>
+<!--function Error_co()-->
+<!--{	-->
+	<!--pp1=document.getElementById("p1").value;	-->
+	<!--pp2=document.getElementById("p2").value;-->
+	<!--if(pp1!=pp2)-->
+		<!--{-->
+		<!--document.getElementsByTagName("span")[0].innerHTML="  X";-->
+		<!--}-->
+	<!--else{document.getElementsByTagName("span")[0].innerHTML="";}	-->
+<!--}-->
+<!--</script>-->

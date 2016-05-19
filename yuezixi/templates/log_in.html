@@ -5,6 +5,10 @@
 <link rel="stylesheet" href="../static/login.css">
 <meta http-equiv="content-type" content="tetx/html; charset=UTF-8">
 	<title></title>
+	<style>
+		h1{text-align: center;z-index: 7;font-size: 80px;
+			position: relative;top:90px;color:red;}
+	</style>
 </head>
 <body>
 <div>
@@ -15,9 +19,16 @@
 	<a href= "{{ url_for('register') }}" class="topr">注册</a>
 </nav>
 <form method="post">
-<div>姓名：<input type="text" placeholder="请输入姓名" name="Name_0" required="" /></div>
-<div>密码：<input type="password" placeholder="请输入密码" name="Password_0" required="" /></div>
-<div><input type="submit" value="登录"></div>
+	{{form.hidden_tag()}}
+<div>{% if error !=""%}
+	<span style="color: red;">{{ error }}</span>
+	{% endif %}</div>
+
+
+<div>姓名 {{form.Name_0(placeholder="请输入姓名" )}}</div>
+	<div>密码 {{form.Password_0(placeholder="请输入姓名")}}</div>
+<div>	{{form.Submit(value="登录")}}</div>
+
 </form>
 </body>
 </html>

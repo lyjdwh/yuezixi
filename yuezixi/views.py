@@ -5,11 +5,14 @@ from datetime  import datetime
 from fuzzywuzzy import fuzz
 from flask_mail import Message
 from threading import Thread
+import os
+
+
 
 from . import app
 from . import lm,db,mail
 from .models import User,PersonalData,Make_match,Mked
-# from .forms import
+from .forms import LoginForm,RegisterForm,DataForm
 
 
 def match_user(match_user):
@@ -24,8 +27,9 @@ def load_user(id):
 def time_filter(s):
 
     return s.strftime('%b %d %H:%M')
+    #return s.strftime('%b %d %H:%M')
 
-
+    return
 
 @app.before_request
 def before_request():
@@ -33,36 +37,39 @@ def before_request():
 
 
 @app.route('/index')
+@app.route('/')
 @login_required
 def index():
     return  render_template('index.html')
 
 @app.route('/register',methods=['POST','GET'])
 def register():
-    if request.method=='POST':
-        user1=User(request.form['Name_0'],request.form['Password_0'])
+    form=RegisterForm()
+    if form.validate_on_submit():
+        user1=User(form.Name_0.data,form.Password_0.data)
         db.session.add(user1)
         db.session.commit()
         login_user(user1)
         return redirect(url_for('modify'))
 
-    return render_template('register.html')
+    return render_template('register.html',form=form)
 
 @app.route('/log_in',methods=['POST','GET'])
 def log_in():
-    error=None
-    if request.method=="POST":
-        user = User.query.filter_by(username=request.form['Name_0']).first()
+    error=""
+    form=LoginForm()
+    if form.validate_on_submit():
+        user = User.query.filter_by(username=form.Name_0.data).first()
         if user is None:
             error = 'Invalid username'
-        elif user.verify_password(request.form['Password_0']) is not True:
+        elif user.verify_password(form.Password_0.data) is not True:
             error = 'Invalid password'
 
         else:
             login_user(user)
             flash('You were logged in')
             return redirect(url_for('index'))
-    return render_template('log_in.html', error=error)
+    return render_template('log_in.html', error=error,form=form)
 
 
 @app.route('/info')
@@ -72,28 +79,47 @@ def info():
 @app.route('/modify',methods=['POST','GET'])
 @login_required
 def modify():
-    if request.method=="POST":
+    form=DataForm()
+    if  form.validate_on_submit():
         personal_data1 = current_user.PersonalData.first()
-
+        #filename=form.Photo.data.filename+datetime.now().strftime('%a%b%d%H%M%S')
+        filename=form.Photo.data.filename
         if personal_data1 is not None:
             db.session.delete(personal_data1)
-            db.commit()
+            if personal_data1.Photo !='':
+
+                os.remove(os.path.join("yuezixi/static/uploads/",personal_data1.Photo))
+            db.session.commit()
+        if filename !='':
+
+            suffix=filename.split('.')[1]
+            filename=datetime.now().strftime('%a%b%d%H%M%S')+'.'+suffix
+
+            form.Photo.data.save('yuezixi/static/uploads/'+filename)
+        else:
+            filename=''
+
         Name=request.form['Name_1']
         Sex=request.form['Sex_1']
         Major=request.form['Major_1']
         Phone_number=request.form['Phone_number_1']
         QQ=request.form['QQ_1']
-        Email=request.form['Email_1']
+        Email=form.Email_1.data
         Best_subject=request.form['Best_subject_1']
         Worse_subject=request.form['Worse_subject_1']
         Self_introduction=request.form['Self_introduction_1']
         Goal=request.form['Goal']
-        personal_data2=PersonalData(Name,Sex,Major,Phone_number,QQ,Email,Best_subject,Worse_subject,Self_introduction,Goal,current_user)
+        personal_data2=PersonalData(Name,Sex,Major,Phone_number,QQ,Email,Best_subject,Worse_subject,Self_introduction,Goal,filename,current_user)
+
         db.session.add(personal_data2)
         db.session.commit()
         return redirect(url_for('index'))
     personal_data1 = current_user.PersonalData.first()
-    return  render_template('modify.html',pd=personal_data1)
+    if personal_data1.Photo!='':
+        picture=os.path.join("../static/uploads/",personal_data1.Photo)
+    else:
+        picture="../static/header_new.png"
+    return  render_template('modify.html',pd=personal_data1,form=form,picture=picture)
 @app.route('/person')
 @login_required
 def person():
@@ -116,18 +142,20 @@ def make_meet():
 
         make_match1=Make_match(Subject,Course,Location,Start_time,End_time,Target_1,Target_2,Number,Remarks,current_user)
         db.session.add(make_match1)
+        #return current_user.PersonalData.first().Shells
         current_user.PersonalData.first().Shells = current_user.PersonalData.first().Shells + 1
+
         db.session.commit()
 
 
-        return redirect(url_for('notice'))
+        return render_template('fail.html',message1='自习邀请已发出',message2='您可以在‘当前预约‘页面和您的填写的邮箱中查看应约自习的同学的信息',url=url_for('notice'))
     return render_template('make_meet.html')
 
 @app.route('/notice',methods=['POST','GET'])
 @app.route('/notice/<int:page>', methods = ['GET', 'POST'])
 @login_required
 def notice(page = 1):
-    mks=Make_match.query.filter(Make_match.Number_1 < Make_match.Number ).order_by(Make_match.id.desc()).paginate(page, 2, False)
+    mks=Make_match.query.filter(Make_match.Number_1 < Make_match.Number ).order_by(Make_match.id.desc()).paginate(page, 5, False)
 
     return render_template('notice.html',mks=mks)
 
@@ -174,7 +202,9 @@ def current():
 
     mkeds=current_user.Make_match.order_by(Make_match.id.desc()).first()
     if mkeds is None:
-        return "你还没有发起自习，或者没人应约你的自习"
+        message1="你还没有发起自习"
+        message2="或者暂时还没人应约你的自习"
+        return render_template('fail.html',message1=message1,message2=message2,url=url_for('index'))
     else:
         return render_template('current.html',mkeds=mkeds.Mked.all())
 
@@ -201,6 +231,7 @@ def invate(id):
         current_user.PersonalData.first().Shells = current_user.PersonalData.first().Shells + 1
         db.session.commit()
         session['QQ']=mk.User.PersonalData.first().QQ
+
         return redirect(url_for('mail1'))
 
     if "match_meet" in request.referrer:
@@ -209,6 +240,7 @@ def invate(id):
         g.last_page=url_for('index')
     g.mk=Make_match.query.filter_by(id=id).first()
     return render_template('invate.html')
+
 
 @app.route("/mail1")
 def mail1():
@@ -221,7 +253,10 @@ def mail1():
     str1="有人应约你的自习啦， 他/她的名字："+invited_data.Name.encode('utf-8')+", 年级："+invited_data.Grade.encode('utf-8')+", 专业："+invited_data.Major.encode('utf-8')+", qq:"+invited_data.QQ.encode('utf-8')+", Email:"+invited_data.Email.encode('utf-8')+", 你们可以在线下联系呦，祝你们学习愉快"
     send_email('约自习',('me','1412511544@qq.com'),[invited_data.Email],str2)
     send_email('约自习',('me','1412511544@qq.com'),[invite_data.Email],str1)
-    return 'good'
+    message1 = "您已应约自习"
+    message2 = "一封邮件已发送到您邮箱，您可以查看他/她的信息"
+
+    return render_template('fail.html', message1=message1, message2=message2,url =url_for('notice'))
 
 
 def send_async_email(app, msg):

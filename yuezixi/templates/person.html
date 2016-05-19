@@ -12,11 +12,24 @@
 	<a href="{{url_for('current')}}" class="current">当前预约</a>
 </nav>
 <div class="summery">
+	{%if pd.Photo %}
+	<img src ="../static/uploads/{{pd.Photo}}"
+	{% else %}
+
+	{% endif %}
 	<img src="../static/header_new.png">
+	{% if pd  %}
 	<div class="summery_1">
 		<span class="left">贝壳数：<span>{{pd.Shells}}</span></span>
 		<span class="right">等级称号：{%if pd.Shells<10 %}<span>自习初手</span>{% elif pd.Shells<30 %}<span>自习小子</span>{% elif pd.Shells<60 %}<span>自习达人</span>{% elif pd.Shells<100 %}<span>自习帝</span>{% else %}<span>自习狂魔</span>{% endif %}</span>
 
+	</div>
+	{% else %}
+	<div class="summery_1">
+		<span class="left">贝壳数：<span>0</span></span>
+		<span class="right">等级称号：<span>自习初手</span></span>
+	</div>
+	{% endif %}
 	</div>
 </div>
 <div class="div_1">

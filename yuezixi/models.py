@@ -43,7 +43,7 @@ class PersonalData(db.Model):
     Email = db.Column(db.String(30))
     Phone_number=db.Column(db.String(25))
     QQ=db.Column(db.String(20))
-    Shells=db.Column(db.Integer)
+    Shells=db.Column(db.Integer,default=0)
     Rank=db.Column(db.String(30))
     Grade=db.Column(db.String(15))
     Major=db.Column(db.String(30))
@@ -51,10 +51,11 @@ class PersonalData(db.Model):
     Worse_subject=db.Column(db.String(40))
     Goal=db.Column(db.String(80))
     Self_introduction=db.Column(db.Text)
+    Photo=db.Column(db.String(40))
     PersonalData_id= db.Column(db.Integer, db.ForeignKey('user.id'))
     User= db.relationship('User', backref=db.backref('PersonalData', lazy='dynamic'))
 
-    def __init__(self,Name,Sex,Major,Phone_number,QQ,Email,Best_subject,Worse_subject,Self_introduction,Goal,User):
+    def __init__(self,Name,Sex,Major,Phone_number,QQ,Email,Best_subject,Worse_subject,Self_introduction,Goal,Photo,User):
         self.Name=Name
         self.Sex=Sex
         self.Major=Major
@@ -65,6 +66,7 @@ class PersonalData(db.Model):
         self.Worse_subject=Worse_subject
         self.Self_introduction=Self_introduction
         self.Goal=Goal
+        self.Photo=Photo
         self.User=User
 
     def __repr__(self):
