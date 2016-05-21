@@ -3,6 +3,10 @@ from datetime import datetime
 from werkzeug.security import generate_password_hash, check_password_hash
 from flask.ext.login import UserMixin
 
+#import flask.ext.whooshalchemy
+
+#from jieba.analyse import ChineseAnalyzer
+
 class User(db.Model,UserMixin):
     __tablename__='user'
     id=db.Column(db.Integer,primary_key=True)
@@ -37,6 +41,9 @@ class User(db.Model,UserMixin):
         return '<User %r>'%self.username
 
 class PersonalData(db.Model):
+   # __searchable__ = ['Name']
+    #__analyzer__ = ChineseAnalyzer()
+    #__tablename__='personaldata'
     id=db.Column(db.Integer,primary_key=True)
     Name=db.Column(db.String(20))
     Sex=db.Column(db.String(10))
@@ -73,6 +80,9 @@ class PersonalData(db.Model):
         return '<User %r>'%self.Name
 
 class Make_match(db.Model):
+    #__tablename__ = 'make_match'
+
+
     id=db.Column(db.Integer,primary_key=True)
     Subject=db.Column(db.String(20))
     Course=db.Column(db.String(20))
@@ -134,6 +144,8 @@ class Mked(db.Model):
 
 
 db.create_all()
+
+
 
 
 

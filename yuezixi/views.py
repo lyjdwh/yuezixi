@@ -7,6 +7,10 @@ from flask_mail import Message
 from threading import Thread
 import os
 
+#import flask.ext.whooshalchemy as whooshalchemy
+#from jieba.analyse import ChineseAnalyzer
+
+
 
 
 from . import app
@@ -14,6 +18,7 @@ from . import lm,db,mail
 from .models import User,PersonalData,Make_match,Mked
 from .forms import LoginForm,RegisterForm,DataForm
 
+#whooshalchemy.whoosh_index(app,Make_match)
 
 def match_user(match_user):
     choice=[]
@@ -155,7 +160,7 @@ def make_meet():
 @app.route('/notice/<int:page>', methods = ['GET', 'POST'])
 @login_required
 def notice(page = 1):
-    mks=Make_match.query.filter(Make_match.Number_1 < Make_match.Number ).order_by(Make_match.id.desc()).paginate(page, 5, False)
+    mks=Make_match.query.filter(Make_match.Number_1 < Make_match.Number ).order_by(Make_match.id.desc()).paginate(page, 2, False)
 
     return render_template('notice.html',mks=mks)
 
@@ -270,13 +275,15 @@ def send_email(subject, sender, recipients, text_body):
     thr.start()
 
 
+'''
+@app.route('/search')
+def search():
+    return 'g'
+    Make_match.query.whoosh_search(u'学科提升').all()
 
 
 
-
-
-
-
+'''
 
 
 

@@ -16,9 +16,10 @@ a{color:#000;}
 	background: #00bcd4;
 		text-align: center;
 		margin:0 0;
-		padding: 10px;;
+		padding: 40px;
 		left:0px;
 		bottom:0;
+		
 	}
 	.span3_1{
 		float: left;
@@ -78,14 +79,14 @@ a{color:#000;}
 <div class="pagination">
     <div class="row-fluid">
         <span class="span3 span3_1 offset2">
-           {% if mks.has_prev %}<a href="{{ url_for('notice', page = mks.prev_num) }}"><<上一页</a>{% else %}&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;{% endif %}
+           {% if mks.has_prev %}<a href="{{ url_for('notice', page = mks.prev_num) }}"><<上一页</a>{% else %}-------{% endif %}
         </span>
         <span class="span3 span3_2">
 			{{ mks.page }}/{{ mks.pages }}
         </span>
         <span class="span3 span3_3">
 
-           {% if mks.has_next %}<a href="{{ url_for('notice', page = mks.next_num) }}">下一页>></a>{% else %}&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;{% endif %}
+           {% if mks.has_next %}<a href="{{ url_for('notice', page = mks.next_num) }}">下一页>></a>{% else %}-------{% endif %}
         </span>
     </div>
 </div>
