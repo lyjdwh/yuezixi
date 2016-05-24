@@ -5,6 +5,11 @@
 <link rel="stylesheet" href="../static/person.css">
 <meta http-equiv="content-type" content="tetx/html; charset=UTF-8">
 	<title></title>
+	<style type="text/css">
+	img{
+
+	}
+	</style>
 </head>
 <body>
 <nav class="top">
@@ -13,11 +18,11 @@
 </nav>
 <div class="summery">
 	{%if pd.Photo %}
-	<img src ="../static/uploads/{{pd.Photo}}"
+	<img src ="../static/uploads/{{pd.Photo}}">
 	{% else %}
-
-	{% endif %}
 	<img src="../static/header_new.png">
+	{% endif %}
+
 	{% if pd  %}
 	<div class="summery_1">
 		<span class="left">贝壳数：<span>{{pd.Shells}}</span></span>
