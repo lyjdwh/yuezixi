@@ -1,4 +1,3 @@
 from yuezixi import app
-
-app.run(debug=False)
-
+app.debug=True
+app.run()

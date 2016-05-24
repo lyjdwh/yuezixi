@@ -34,7 +34,7 @@ def time_filter(s):
     return s.strftime('%b %d %H:%M')
     #return s.strftime('%b %d %H:%M')
 
-    return
+
 
 @app.before_request
 def before_request():
@@ -50,14 +50,19 @@ def index():
 @app.route('/register',methods=['POST','GET'])
 def register():
     form=RegisterForm()
+    error=""
     if form.validate_on_submit():
+        user = User.query.filter_by(username=form.Name_0.data).first()
+        if user is not None:
+            error = u'您的名字被注册过啦'
+            return render_template('register.html',form=form,error=error)
         user1=User(form.Name_0.data,form.Password_0.data)
         db.session.add(user1)
         db.session.commit()
         login_user(user1)
         return redirect(url_for('modify'))
 
-    return render_template('register.html',form=form)
+    return render_template('register.html',form=form,error=error)
 
 @app.route('/log_in',methods=['POST','GET'])
 def log_in():
@@ -77,9 +82,10 @@ def log_in():
     return render_template('log_in.html', error=error,form=form)
 
 
-@app.route('/info')
-def info():
-    return render_template('info.html')
+@app.route('/info/<name1>')
+@login_required
+def info(name1):
+    return render_template(name1+'.html')
 
 @app.route('/modify',methods=['POST','GET'])
 @login_required
@@ -120,7 +126,7 @@ def modify():
         db.session.commit()
         return redirect(url_for('index'))
     personal_data1 = current_user.PersonalData.first()
-    if personal_data1.Photo!='':
+    if hasattr(personal_data1,"Photo"):
         picture=os.path.join("../static/uploads/",personal_data1.Photo)
     else:
         picture="../static/header_new.png"
@@ -165,6 +171,7 @@ def notice(page = 1):
     return render_template('notice.html',mks=mks)
 
 @app.route('/match_meet',methods=["POST","GET"])
+@login_required
 def match_meet():
     if request.method == 'POST':
         Subject = request.form['Subject_1']
@@ -203,6 +210,7 @@ def match_meet():
     return render_template('match_meet.html')
 
 @app.route('/current',methods=["POST","GET"])
+@login_required
 def current():
 
     mkeds=current_user.Make_match.order_by(Make_match.id.desc()).first()
@@ -218,6 +226,7 @@ def current():
 
 
 @app.route('/invate/<int:id>', methods=["POST","GET"])
+@login_required
 def invate(id):
     if request.method=='POST':
         mk = Make_match.query.filter_by(id=id).first()
@@ -231,7 +240,11 @@ def invate(id):
         Email=current_user.PersonalData.first().Email
         Grade=current_user.PersonalData.first().Grade
         Self_introduction=current_user.PersonalData.first().Self_introduction
-        mked=Mked(Name,Sex,Email,Phone_number,QQ,Grade,Major,Self_introduction,mk)
+        if hasattr(current_user.PersonalData.first(),"Photo"):
+            Photo=current_user.PersonalData.first().Photo
+        else:
+            Photo="header.png"
+        mked=Mked(Name,Sex,Email,Phone_number,QQ,Grade,Major,Self_introduction,Photo,mk)
         db.session.add(mked)
         current_user.PersonalData.first().Shells = current_user.PersonalData.first().Shells + 1
         db.session.commit()
@@ -248,14 +261,16 @@ def invate(id):
 
 
 @app.route("/mail1")
+@login_required
 def mail1():
     #send_email('约自习', ('me', '1412511544@qq.com'), ['15207183373@163.com'],'hello')
     #return 'good'
     invite_data=PersonalData.query.filter_by(QQ=session['QQ']).first()
     invited_data=current_user.PersonalData.first()
 
-    str2="你已经应约了"+invite_data.Name.encode('utf-8')+"的自习啦， 她/他的qq:"+invite_data.QQ.encode('utf-8')+", Email:"+invite_data.Email.encode('utf-8')+", 你们可以在线下联系呦， 祝你们学习愉快"
-    str1="有人应约你的自习啦， 他/她的名字："+invited_data.Name.encode('utf-8')+", 年级："+invited_data.Grade.encode('utf-8')+", 专业："+invited_data.Major.encode('utf-8')+", qq:"+invited_data.QQ.encode('utf-8')+", Email:"+invited_data.Email.encode('utf-8')+", 你们可以在线下联系呦，祝你们学习愉快"
+    str2=u"你已经应约了"+invite_data.Name+u"的自习啦， 她/他的qq:"+invite_data.QQ+u", Email:"+invite_data.Email+u", 你们可以在线下联系呦， 祝你们学习愉快"
+    str1=u"有人应约你的自习啦， 他/她的名字："+invited_data.Name+u", 年级："+invited_data.Grade+u", 专业："+invited_data.Major+u", qq:"+invited_data.QQ+u", Email:"+invited_data.Email+u", 你们可以在线下联系呦，祝你们学习愉快"
+
     send_email('约自习',('me','1412511544@qq.com'),[invited_data.Email],str2)
     send_email('约自习',('me','1412511544@qq.com'),[invite_data.Email],str1)
     message1 = "您已应约自习"
@@ -275,6 +290,15 @@ def send_email(subject, sender, recipients, text_body):
     thr.start()
 
 
+
+@app.errorhandler(404)
+def internal_error(error):
+    return render_template('fail.html',message1="您访问的页面不存在",message2="试试其他页面吧！",url=url_for('index')), 404
+
+@app.errorhandler(500)
+def internal_error(error):
+    db.session.rollback()
+    return render_template('fail.html',message1="出问题了唉",message2="请您检查一下，是否有非法操作！",url=url_for('index')), 500
 '''
 @app.route('/search')
 def search():

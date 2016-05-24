@@ -23,12 +23,19 @@
             <span style="color: red;">{{ error }}</span>
           {% endfor %}<br>
 	</div>
+	{%if error!=""%}
+	<div><span style="color:red">{{error}}</span> </div>
+	{% endif %}
 	<div>{{form.Name_0.label}}{{form.Name_0(placeholder="请输入姓名")}}</div>
 	<div>{{form.Password_0.label}}{{form.Password_0(placeholder="请输入密码",id="p1")}}</div>
 	<div>{{form.Password_01.label}}{{form.Password_01( placeholder="请再次输入密码",id="p2")}}&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;</div>
 	<div> {{form.Summit(value='登录')}}</div>
 
 </form>
+
+<?php
+echo "我的第一段 PHP 脚本！";
+?>
 
 </body>
 </html>

@@ -51,8 +51,8 @@ class PersonalData(db.Model):
     Phone_number=db.Column(db.String(25))
     QQ=db.Column(db.String(20))
     Shells=db.Column(db.Integer,default=0)
-    Rank=db.Column(db.String(30))
-    Grade=db.Column(db.String(15))
+    Rank=db.Column(db.String(30),default="0")
+    Grade=db.Column(db.String(15) ,default="0")
     Major=db.Column(db.String(30))
     Best_subject=db.Column(db.String(40))
     Worse_subject=db.Column(db.String(40))
@@ -125,8 +125,9 @@ class Mked(db.Model):
     Self_introduction = db.Column(db.Text)
     Mked_id=db.Column(db.Integer,db.ForeignKey('make_match.id'))
     Make_match = db.relationship('Make_match', backref=db.backref('Mked', lazy='dynamic'))
+    Photo=db.Column(db.String(30))
 
-    def __init__(self,Name,Sex,Email,Phone_number,QQ,Grade,Major,Self_introduction,Make_match):
+    def __init__(self,Name,Sex,Email,Phone_number,QQ,Grade,Major,Self_introduction,Photo,Make_match):
         self.Name = Name
         self.Sex = Sex
         self.Major = Major
@@ -136,6 +137,7 @@ class Mked(db.Model):
         self.Grade=Grade
         self.Self_introduction = Self_introduction
         self.Make_match=Make_match
+        self.Photo=Photo
 
     def __repr__(self):
         return '<Mked %>'% self.Name

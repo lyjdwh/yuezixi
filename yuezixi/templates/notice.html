@@ -43,7 +43,8 @@ a{color:#000;}
 	{% for mk in mks.items %}
 <a href="{{url_for('invate',id=mk.id)}}">
 	<div class="contents">
-		<img class="" src="../static/uploads/ThuMay19013608.png"/>
+		<img class="" src={%if mk.User.PersonalData.first().Photo !="" %} "../static/uploads/{{mk.User.PersonalData.first().Photo}}" {%else %} "../static/header_new.png" {%endif %}/>
+
 		<table class="top_info">
 			<tr>
 				<td name="Name_3">{{mk.User.PersonalData.first().Name}}</td>
