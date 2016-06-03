@@ -16,3 +16,4 @@ def delete_notice():
 
 while(1):
 	Timer(24*60*60,delete_notice).start()
+

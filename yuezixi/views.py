@@ -194,8 +194,8 @@ def match_meet():
 
         for mk in mks:
             mk.Score=fuzz.partial_ratio(Location,mk.Location)
-
         mks1=Make_match.query.filter(Make_match.Score>=80).order_by(Make_match.Score.desc()).all()
+
 
         for mk in mks1:
             a1=fuzz.partial_ratio(Subject,mk.Subject)
@@ -203,7 +203,7 @@ def match_meet():
             a3=fuzz.partial_ratio(Target_1,mk.Target1)
             a4=fuzz.partial_ratio(Target_2,mk.Target2)
             mk.Score=mk.Score+a2+a2+a3+a4
-        mks2=Make_match.query.order_by(Make_match.Score.desc()).limit(20).paginate(1, 21, False)
+        mks2=Make_match.query.filter(Make_match.Number_1 < Make_match.Number).order_by(Make_match.Score.desc()).limit(20).paginate(1, 21, False)
         return render_template('notice.html',mks=mks2)
 
 
@@ -308,6 +308,7 @@ def search():
 
 
 '''
+
 
 
 
