@@ -21,7 +21,8 @@ a{color:#000;}
 {% for mked in mkeds %}
 
 <div class="contents contents_1">
-	<img class="" src="../static/uploads/{{mked.Photo}}"/>
+	<!-- <img class="" src="../static/uploads/{{mked.Photo}}"/> -->
+	<img class="" src={%if mked.Photo !="" %} "../static/uploads/{{mked.Photo}}" {%else %} "../static/header_new.png" {%endif %}/>
 	<table class="top_info">
 			<tr>	
 				<td name="Name_4">{{mked.Name}}</td>
