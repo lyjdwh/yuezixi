@@ -8,6 +8,7 @@ from threading import Thread
 import os
 
 #import flask.ext.whooshalchemy as whooshalchemy
+
 #from jieba.analyse import ChineseAnalyzer
 
 
@@ -140,6 +141,13 @@ def person():
 @app.route('/make_meet',methods=['POST','GET'])
 @login_required
 def make_meet():
+    if current_user.PersonalData.first() is None:
+        message1 = "您还没有填写必要的信息"
+        message2 = "请前往信息修改页面，填写必要的信息，尤其别忘了邮箱偶"
+
+        return render_template('fail.html', message1=message1, message2=message2,url =url_for('modify'))
+
+
     if request.method=='POST':
         Subject=request.form['Subject']
         Course=request.form['Course']
