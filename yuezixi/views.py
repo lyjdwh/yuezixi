@@ -238,10 +238,9 @@ def current():
 def invate(id):
     if request.method=='POST':
         if current_user.PersonalData.first() is None:
-        message1 = "您还没有填写必要的信息"
-        message2 = "请前往信息修改页面，填写必要的信息，尤其别忘了邮箱偶"
-
-        return render_template('fail.html', message1=message1, message2=message2,url =url_for('modify'))
+            message1 = "您还没有填写必要的信息"
+            message2 = "请前往信息修改页面，填写必要的信息，尤其别忘了邮箱偶"
+            return render_template('fail.html', message1=message1, message2=message2,url =url_for('modify'))
         mk = Make_match.query.filter_by(id=id).first()
         mk.Number_1=mk.Number_1+1
         db.session.commit()
