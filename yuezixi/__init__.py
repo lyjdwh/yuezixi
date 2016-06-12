@@ -22,6 +22,8 @@ MAIL_PORT=app.config['MAIL_PORT']
 MAIL_USERNAME=app.config['MAIL_USERNAME']
 MAIL_PASSWORD=app.config['MAIL_PASSWORD']
 
+MAIL=app.config['MAIL']
+
 if not app.debug:
     import logging
     from logging import Formatter
@@ -32,7 +34,7 @@ if not app.debug:
     credentials = (MAIL_USERNAME,MAIL_PASSWORD)
     if MAIL_USERNAME or MAIL_PASSWORD:
         credentials = (MAIL_USERNAME, MAIL_PASSWORD)
-    mail_handler = SMTPHandler((MAIL_SERVER, MAIL_PORT), ADMINS, ADMINS, 'your application failed', credentials)
+    mail_handler = SMTPHandler((MAIL_SERVER, MAIL_PORT),MAIL,ADMINS, 'your application failed', credentials)
     mail_handler.setLevel(logging.ERROR)
     mail_handler.setFormatter(Formatter('''
        Message type:       %(levelname)s

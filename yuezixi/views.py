@@ -6,6 +6,9 @@ from fuzzywuzzy import fuzz
 from flask_mail import Message
 from threading import Thread
 import os
+from . import app
+MAIL=app.config['MAIL']
+
 
 #import flask.ext.whooshalchemy as whooshalchemy
 
@@ -288,8 +291,8 @@ def mail1():
     str2=u"你已经应约了"+invite_data.Name+u"的自习啦， 她/他的qq:"+invite_data.QQ+u", Email:"+invite_data.Email+u", 你们可以在线下联系呦， 祝你们学习愉快"
     str1=u"有人应约你的自习啦， 他/她的名字："+invited_data.Name+u", 年级："+invited_data.Grade+u", 专业："+invited_data.Major+u", qq:"+invited_data.QQ+u", Email:"+invited_data.Email+u", 你们可以在线下联系呦，祝你们学习愉快"
 
-    send_email('约自习',('me','1412511544@qq.com'),[invited_data.Email],str2)
-    send_email('约自习',('me','1412511544@qq.com'),[invite_data.Email],str1)
+    send_email('约自习',MAIL,[invited_data.Email],str2)
+    send_email('约自习',MAIL,[invite_data.Email],str1)
     message1 = "您已应约自习"
     message2 = "一封邮件已发送到您邮箱，您可以查看他/她的信息"
 

@@ -13,7 +13,8 @@ MAIL_USE_SSL=True
 MAIL_USERNAME=''#如果是qq邮箱则为qq号，136邮箱同理
 MAIL_PASSWORD=''#客户端密码
 MAIL_USE_TLS = False
-ADMINS=['1412511544@qq.com']
+MAIL=('','')#发件人如('me','1412511544@qq.com')
+ADMINS=['']#接收错误的邮箱的邮箱地址
 
 
 WHOOSH_BASE='mysql+pymysql://root:abc201314@localhost/lyjdwh'
