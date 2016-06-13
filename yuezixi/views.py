@@ -44,6 +44,10 @@ def time_filter(s):
 def before_request():
     pass
 
+@app.teardown_appcontext
+def shutdown_session(exception=None):
+  db.session.remove()
+
 
 @app.route('/index')
 @app.route('/')
