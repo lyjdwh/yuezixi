@@ -6,6 +6,8 @@ SECRET_KEY = 'you-will-never-guess'
 
 SQLALCHEMY_DATABASE_URI='mysql+pymysql://root:abc201314@localhost/lyjdwh'#mysql的配置
 SQLALCHEMY_TRACK_MODIFICATIONS=True
+SQLALCHEMY_POOL_RECYCLE=15
+SQLALCHEMY_POOL_SIZE=15
 
 MAIL_SERVER=''#邮箱服务器
 MAIL_PORT=465
